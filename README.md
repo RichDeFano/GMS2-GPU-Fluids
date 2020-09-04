@@ -5,5 +5,8 @@ HEAVY WIP - Only started a few days ago, not in usable condition yet.
 Various other simulations and papers were used as reference.
 
 -https://github.com/kvchen/flickflow/tree/master/src
+
 -http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch38.html
+
+-https://d2f99xq7vri1nk.cloudfront.net/legacy_app_files/pdf/ns.pdf
 
