@@ -1,30 +1,6 @@
 //var tempStorage = surface_create(room_w,room_h);
-//Advection
-var defaultDissipation = 0.20;			//Range 0-1 - should be higher than velocity if its going to leave anything behind
-var defaultVelocityDissipation = 0.40;	//Range 0-1
-var defaultSize = 1.0;
-var defaultScale = 1.0;
-//Step 2: Viscous Diffusion
-var jacobiIterations = 50;				//Range 20-100
-var defaultViscosity = 0.001;
-var defaultViscAlpha = 1.0;
-var defaultViscBeta = 0.20;
-var defaultAScale = 1.0;
-var defaultBScale = 1.0;
-//Vorticity Confinement
-var defaultVorticityScale = 0.5;
-var defaultVorticitySize = 1.0;
-var defaultEpsillon = 0.00024414;
-var defaultCurl = 0.3;
-//Projection
-var defaultJacobiAlpha = (-1.0);
-var defaultJacobiBeta = (0.25);
-//Pressure Boundaries
-var pBoundariesHeight = 1.0;
-var pBoundariesWidth = 1.0;
-///Velocity Boundaries
-var vBoundariesHeight = 1.0;
-var vBoundariesWidth = 1.0;
+
+
 ////////////////////////////////////////////////////////////////////
 //Step 1: Advection of the Vector Fields
 ////////////////////////////////////////////////////////////////////
@@ -62,15 +38,15 @@ surface_reset_target();
 	surface_copy(surf_density,0,0,surf_tempDensity);
 	surface_copy(surf_tempDensity,0,0,tempStorage);
 	
-	
+
 ////////////////////////////////////////////////////////////////////
 //Step 2: Diffusion of the Vector Fields
 ////////////////////////////////////////////////////////////////////
 //Add velocity to the diffusion field
 surface_set_target(surf_tempDiffusion);
 	shader_set(shd_add);
-		shader_set_uniform_f(ascale,defaultAScale);
-		shader_set_uniform_f(bscale,defaultAScale);
+		shader_set_uniform_f(ascale,defaultScale);
+		shader_set_uniform_f(bscale,defaultScale);
 		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field1"),surface_get_texture(surf_velocity));
 		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field2"),surface_get_texture(surf_diffusion));
 		draw_surface(surf_diffusion,0,0);
@@ -87,7 +63,7 @@ for(var i=0;i<jacobiIterations;i++) {
 			shader_set_uniform_f(alph,defaultViscAlpha);
 			shader_set_uniform_f(beta,defaultViscBeta);
 			texture_set_stage(shader_get_sampler_index(shd_pressureJacobi,"pressure_field"),surface_get_texture(surf_diffusion));
-			texture_set_stage(shader_get_sampler_index(shd_pressureJacobi,"divergence_field"),surface_get_texture(surf_tempDiffusion));
+			texture_set_stage(shader_get_sampler_index(shd_pressureJacobi,"divergence_field"),surface_get_texture(surf_diffusion));
 	          draw_surface(surf_diffusion, 0, 0);
 		shader_reset();
 	surface_reset_target();
@@ -97,9 +73,10 @@ for(var i=0;i<jacobiIterations;i++) {
 }
 	
 //Add back into velocity field with viscosity
+
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_add);
-		shader_set_uniform_f(ascale,defaultAScale);
+		shader_set_uniform_f(ascale,defaultScale);
 		shader_set_uniform_f(bscale,defaultViscosity);
 		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field1"),surface_get_texture(surf_velocity));
 		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field2"),surface_get_texture(surf_diffusion));
@@ -114,8 +91,8 @@ surface_reset_target();
 
 surface_set_target(surf_tempVorticity)
 	shader_set(shd_vorticity);
-		shader_set_uniform_f(vorSize,defaultVorticitySize);
-		shader_set_uniform_f(vorScale,defaultVorticityScale);
+		shader_set_uniform_f(vorSize,defaultSize/2.0);
+		shader_set_uniform_f(vorScale,defaultScale);
 		texture_set_stage(shader_get_sampler_index(shd_vorticity,"velocity_field"),surface_get_texture(surf_velocity));
 			draw_surface(surf_vorticity,0,0);
 	shader_reset();
@@ -127,8 +104,8 @@ surface_reset_target();
 //Vorticity Force Confinement
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_vorticityForce);
-		shader_set_uniform_f(vorForceSize,defaultVorticitySize,defaultVorticitySize);
-		shader_set_uniform_f(vorForceScale, defaultVorticityScale);
+		shader_set_uniform_f(vorForceSize,defaultSize/2.0,defaultSize/2.0);
+		shader_set_uniform_f(vorForceScale, defaultScale);
 		shader_set_uniform_f(vorForceTime,stepTime);
 		shader_set_uniform_f(vorForceEp, defaultEpsillon);
 		shader_set_uniform_f(vorForceCurl,defaultCurl,defaultCurl);
@@ -140,7 +117,7 @@ surface_reset_target();
 	surface_copy(tempStorage,0,0,surf_velocity);
 	surface_copy(surf_velocity,0,0,surf_tempVelocity);
 	surface_copy(surf_tempVelocity,0,0,tempStorage);
-	 
+
 //////////////////////////////////////////////////////////////
 //Step 3: Projection of the Vector Fields
 ////////////////////////////////////////////////////////////
@@ -151,9 +128,9 @@ surface_set_target(surf_tempDivergence);
 			draw_surface(surf_divergence, 0, 0);
     shader_reset();
 surface_reset_target();
-	tempStorage = surf_tempDivergence; 
-	surf_tempDivergence = surf_divergence; 
-	surf_divergence = tempStorage;
+	surface_copy(tempStorage,0,0,surf_divergence);
+		surface_copy(surf_divergence,0,0,surf_tempDivergence);
+		surface_copy(surf_tempDivergence,0,0,tempStorage);
 //Do some more jacobi iterations
 for(var i=0;i<jacobiIterations;i++) {
 	surface_set_target(surf_tempPressure);

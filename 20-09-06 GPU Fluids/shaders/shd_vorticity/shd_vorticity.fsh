@@ -30,10 +30,10 @@ float getCurlFromTexture(float curlValues){
 }
 
 void main() {
-    vec2 coords = gl_FragCoord.xy / size.xy;
+    vec2 coords = gl_FragCoord.xy;// / size.xy;
 
-    vec2 xOffset = vec2(1.0 / size.x, 0.0);
-    vec2 yOffset = vec2(0.0, 1.0 / size.y);
+    vec2 xOffset = vec2(1.0, 0.0);
+    vec2 yOffset = vec2(0.0, 1.0);
 
     float left = getCurlFromTexture(texture2D(velocity_field, coords - xOffset).y);//y
     float right = getCurlFromTexture(texture2D(velocity_field, coords + xOffset).y);//y
@@ -42,5 +42,9 @@ void main() {
 
     vec4 vorticity = vec4(1.0 * ((right - left) - (top + bottom)),0.0, 0.0, 1.0);
 	
-	gl_FragColor = vorticity * texture2D( velocity_field, coords ); //* texture2D( advected_field, pos);
+	vec2 vel = getVelocityFromTexture(texture2D(velocity_field,coords));
+	vec4 newColor = vorticity * getTextureFromVelocity(vel);
+	
+	gl_FragColor = newColor * texture2D(velocity_field,coords);//
+	//vorticity * texture2D( velocity_field, coords ); //* texture2D( advected_field, pos);
 }

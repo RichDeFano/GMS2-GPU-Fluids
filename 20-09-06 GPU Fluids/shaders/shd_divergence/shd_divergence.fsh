@@ -19,7 +19,8 @@ vec2 getVelocityFromTexture(vec4 colorValues){
 }
 
 vec4 setDivergenceToTexture(float data) {
-	return vec4(0.0,0.0,(floor(data * 255.0) / 255.0, fract(data * 255.0));
+	vec2 newDivergence = vec2(floor(data * 255.0) / 255.0, fract(data * 255.0));
+	return vec4(0.0,0.0,newDivergence);
 }
 
 
@@ -30,7 +31,8 @@ void main() {
     vec2 bottom = getVelocityFromTexture(texture2D(velocity_field, coords + vec2(0.0, -1.0)));//.xy;
     vec2 top = getVelocityFromTexture(texture2D(velocity_field, coords + vec2(0.0, 1.0)));//.xy;
 	
-	gl_FragColor = setDivergenceToTexture(clamp( (0.5 * ((right.x - left.x) + (bottom.y - top.y)) ) + (128.0/255.0),0.0,1.0 )) ;
+	float div = (0.5 * ((right.x - left.x) + (bottom.y - top.y)) ) + (128.0/255.0);
+	gl_FragColor = setDivergenceToTexture(clamp(div,0.0,1.0)) ;
 
 	
 }

@@ -9,7 +9,7 @@
 if (mousePressed == true){
 	//splat the ink by updating the density field
 	
-	stepTime++;
+	//stepTime++;
 	surface_set_target(surf_tempDensity);
 		shader_set(shd_gaussianSplat)
 			shader_set_uniform_f(pt,mouse_x,mouse_y);
@@ -29,7 +29,7 @@ if (mousePressed == true){
 		surf_tempDensity = tempStorage;	 
 		
 	*/
-	stepTime++;
+	//stepTime++;
 	//and update the velocity field too
 	surface_set_target(surf_tempVelocity);
 		shader_set(shd_splat);
@@ -44,7 +44,7 @@ if (mousePressed == true){
 		surface_copy(tempStorage,0,0,surf_velocity);
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
-	stepTime++;
+	//stepTime++;
 //Velocity boundaries
 	surface_set_target(surf_tempVelocity);
 		shader_set(shd_boundary);

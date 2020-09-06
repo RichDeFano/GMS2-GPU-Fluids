@@ -13,7 +13,7 @@ float getPressureFromTexture(vec2 pressureData){
 	return pressureData.x + (pressureData.y / 255.0);
 }
 
-vec2 setPressureToTexture(float data){
+vec2 setPressureToTexture(float pressureData){
 	return vec2(floor(pressureData * 255.0) / 255.0, fract(pressureData * 255.0));
 }
 vec2 getVelocityFromTexture(vec4 colorValues){
