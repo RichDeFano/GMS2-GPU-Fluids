@@ -47,8 +47,8 @@ surface_set_target(surf_tempDiffusion);
 	shader_set(shd_add);
 		shader_set_uniform_f(ascale,defaultScale);
 		shader_set_uniform_f(bscale,defaultScale);
-		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field1"),surface_get_texture(surf_velocity));
-		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field2"),surface_get_texture(surf_diffusion));
+		texture_set_stage(shader_get_sampler_index(shd_add,"vector_field"),surface_get_texture(surf_velocity));
+		texture_set_stage(shader_get_sampler_index(shd_add,"scalar_field"),surface_get_texture(surf_diffusion));
 		draw_surface(surf_diffusion,0,0);
 	shader_reset();
 surface_reset_target();
@@ -71,22 +71,23 @@ for(var i=0;i<jacobiIterations;i++) {
 		surface_copy(surf_diffusion,0,0,surf_tempDiffusion);
 		surface_copy(surf_tempDiffusion,0,0,tempStorage);
 }
-	
+
+
 //Add back into velocity field with viscosity
 
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_add);
 		shader_set_uniform_f(ascale,defaultScale);
 		shader_set_uniform_f(bscale,defaultViscosity);
-		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field1"),surface_get_texture(surf_velocity));
-		texture_set_stage(shader_get_sampler_index(shd_add,"tex_field2"),surface_get_texture(surf_diffusion));
+		texture_set_stage(shader_get_sampler_index(shd_add,"vector_field"),surface_get_texture(surf_velocity));
+		texture_set_stage(shader_get_sampler_index(shd_add,"scalar_field"),surface_get_texture(surf_diffusion));
 		draw_surface(surf_velocity,0,0);
 	shader_reset();
 surface_reset_target();
 	surface_copy(tempStorage,0,0,surf_velocity);
 	surface_copy(surf_velocity,0,0,surf_tempVelocity);
 	surface_copy(surf_tempVelocity,0,0,tempStorage);
-
+/*
 //Vorticity Confinement
 
 surface_set_target(surf_tempVorticity)

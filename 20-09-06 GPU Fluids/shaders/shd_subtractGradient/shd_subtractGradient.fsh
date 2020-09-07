@@ -33,7 +33,7 @@ void main() {
     float bottom = getPressureFromTexture(texture2D(pressure_field, coords + vec2(0, -1)).xy);
     float top = getPressureFromTexture(texture2D(pressure_field, coords + vec2(0, 1)).xy);
 
-    vec2 color = center - 0.5 * vec2(right - left, top - bottom);
+    vec2 gradient = center - 0.5 * vec2(right - left, top - bottom);
 	
-	gl_FragColor = vec4(color,0.0,0.0);// * texture2D( gm_BaseTexture, v_vTexcoord );
+	gl_FragColor = vec4(gradient,0.0,0.0);// * texture2D( gm_BaseTexture, v_vTexcoord );
 }

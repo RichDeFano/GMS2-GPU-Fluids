@@ -6,9 +6,16 @@
 
 
 
-if (mousePressed == true){
+//if (mousePressed == true){
 	//splat the ink by updating the density field
 	
+	scr_NavierStokes();
+	stepTime++;
+	
+	surface_copy(tempStorage,0,0,surf_density);
+		surface_copy(surf_density,0,0,surf_tempDensity);
+		surface_copy(surf_tempDensity,0,0,tempStorage);
+if (mousePressed == true){
 	//stepTime++;
 	surface_set_target(surf_tempDensity);
 		shader_set(shd_gaussianSplat)
@@ -45,6 +52,7 @@ if (mousePressed == true){
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
 	//stepTime++;
+	
 //Velocity boundaries
 	surface_set_target(surf_tempVelocity);
 		shader_set(shd_boundary);
@@ -59,14 +67,8 @@ if (mousePressed == true){
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
 	
 		stepTime++;
-
-		
-		
-		
-	scr_NavierStokes();
-	stepTime++;
-		
 }
+/*
 else
 {
 	scr_NavierStokes();
