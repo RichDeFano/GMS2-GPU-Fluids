@@ -38,14 +38,16 @@ vec4 setScalarToTexture(float scalar){
 
 void main()
 {
-	  vec2 coords = vec2(gl_FragCoord.xy);
-    vec4 color = scaleA * texture2D(vector_field, coords) + scaleB * texture2D(scalar_field, coords);
-	gl_FragColor = color;// * texture2D( tex_field2, coords);
-	/*
+
+	vec2 coords = vec2(gl_FragCoord.xy);
+    vec2 color = ((scaleA * getVectorFromTexture(texture2D(vector_field, coords))) * (scaleB * getScalarFromTexture(texture2D(scalar_field, coords))));
+	gl_FragColor = setVectorToTexture(color);// * texture2D( tex_field2, coords);
+	
+/*
 	vec2 coords = vec2(gl_FragCoord.xy);
 	vec2 newVector = scaleA * getVectorFromTexture(texture2D(vector_field, coords));
 	float mag = sqrt( newVector.x*newVector.x + newVector.y*newVector.y ) + (scaleB * getScalarFromTexture(texture2D(scalar_field,coords)));
 	gl_FragColor = setScalarToTexture(mag);// * texture2D( tex_field2, coords);
-	*/
+*/	
 
 }

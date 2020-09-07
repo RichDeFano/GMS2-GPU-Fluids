@@ -17,7 +17,7 @@ vec2 getVectorFromTexture(vec4 colorValues){
 }
 
 vec4 setScalarToTexture(float scalar){
-	float normalizedScalar = scalar/10.0;
+	float normalizedScalar = (scalar/10.0) + (128.0/255.0);
 	vec4 newSTexture = vec4(normalizedScalar,0.0,0.0,0.0);
 	return newSTexture;
 }
@@ -28,10 +28,10 @@ void main() {
     vec2 xOffset = vec2(1.0, 0.0);
     vec2 yOffset = vec2(0.0, 1.0);
 
-    float left = getVectorFromTexture(texture2D(velocity_field, coords - xOffset)).y;//y
-    float right = getVectorFromTexture(texture2D(velocity_field, coords + xOffset)).y;//y
-    float bottom = getVectorFromTexture(texture2D(velocity_field, coords - yOffset)).x;//x
-    float top = getVectorFromTexture(texture2D(velocity_field, coords + yOffset)).x;//x
+    float left = getVectorFromTexture(texture2D(velocity_field, coords - vec2(1.0,0.0))).y;//y
+    float right = getVectorFromTexture(texture2D(velocity_field, coords + vec2(1.0,0.0))).y;//y
+    float bottom = getVectorFromTexture(texture2D(velocity_field, coords - vec2(0.0,1.0))).x;//x
+    float top = getVectorFromTexture(texture2D(velocity_field, coords + vec2(0.0,1.0))).x;//x
 	float temp = (right - left) - (top + bottom);
     vec4 vorticity = setScalarToTexture(temp);
 	

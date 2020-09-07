@@ -42,16 +42,23 @@ vec2 getVectorFromTexture(vec4 colorValues){
 }
 
 
-float getScalarFromTexture(vec2 pressureData){
-	float newScalar = (pressureData.x) + (pressureData.y / 255.0);
-	newPressure = (newPressure * 10.0);
-	return newPressure;
+float getScalarFromTexture(vec4 colorValues){
+	float newScalar = (colorValues.x) + (colorValues.y / 255.0);
+	newScalar = (newScalar * 10.0);
+	return newScalar;
 }
 
-vec2 setScalarToTexture(float scalar){
-	vec2 newScalar = vec2(floor(scalar*255.0)/255.0,fract(scalar * 255.0));
-	newScalar = newScalar / 10.0;
-	return newScalar;
+vec4 setScalarToTexture(float scalar){
+	float normalizedScalar = scalar/10.0;
+	vec4 newSTexture = vec4(normalizedScalar,0.0,0.0,0.0);
+	return newSTexture;
+}
+
+
+vec4 setVectorToTexture(vec2 vector){
+	vec2 normalizedVector = (vector/10.0) + (128.0/255.0);
+	vec4 newVTexture = vec4(normalizedVector,0.0,0.0);
+	return newVTexture;
 }
 
 
@@ -60,8 +67,8 @@ vec2 setScalarToTexture(float scalar){
 void main()
 {
 	vec2 coords = vec2(gl_FragCoord.xy);
-    vec4 color = scaleA * getVectorFromTexture(texture2D(vector_field, coords)) + scaleB * getScalarFromTexture(texture2D(scalar_field, coords));
-	gl_FragColor = color;// * texture2D( tex_field2, coords);
+    vec2 color = ((scaleA * getVectorFromTexture(texture2D(vector_field, coords))) * (scaleB * getScalarFromTexture(texture2D(scalar_field, coords))));
+	gl_FragColor = setVectorToTexture(color);// * texture2D( tex_field2, coords);
 	/*
     vec2 coords = vec2(gl_FragCoord.xy);
 	vec2 velocity = getVelocityFromTexture(texture2D(vector_field,coords));

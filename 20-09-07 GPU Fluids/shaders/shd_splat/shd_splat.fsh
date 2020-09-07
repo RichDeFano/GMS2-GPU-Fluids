@@ -31,7 +31,7 @@ vec4 setVectorToTexture(vec2 vector){
 
 void main() {
 	
-     vec2 coords = vec2(gl_FragCoord.xy);
+    vec2 coords = vec2(gl_FragCoord.xy);
     vec4 sourceColor = texture2D(vector_field, coords);
 	vec4 color;
     if (distance(coords, point) < radius) {
@@ -41,6 +41,7 @@ void main() {
     }
 	
 	gl_FragColor = color;// * texture2D( gm_BaseTexture, v_vTexcoord );
+}
 	/*
 	vec2 coords = vec2(gl_FragCoord.xy);
     vec4 sourceColor = texture2D(vector_field,coords);
@@ -57,4 +58,3 @@ void main() {
 	}
 	gl_FragColor = setVectorToTexture(sourceVector);
 	*/
-}

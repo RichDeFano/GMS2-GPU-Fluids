@@ -55,6 +55,14 @@
             }
         },
         {
+            "Key": "1217fcd3-e002-4f89-837f-d91db83bf176",
+            "Value": {
+                "id": "d1d89117-be26-44f0-b391-730cec4c2725",
+                "resourcePath": "shaders\\shd_pressureBoundary\\shd_pressureBoundary.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "13387339-a268-40e8-a26e-934e8c4c83c5",
             "Value": {
                 "id": "f0a5e368-9d97-4d37-a9df-a9e36d4d5709",
@@ -178,7 +186,7 @@
             "Key": "7c136aec-8fc6-468d-be5f-119a22a5b7f0",
             "Value": {
                 "id": "a2bb2166-7c65-4ef4-9763-8b099270b8c7",
-                "resourcePath": "shaders\\shd_boundary\\shd_boundary.yy",
+                "resourcePath": "shaders\\shd_velocityBoundary\\shd_velocityBoundary.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -290,7 +298,7 @@
             "Key": "beb97eba-0eb7-4880-9b39-80ef74a6d64b",
             "Value": {
                 "id": "6602b517-829a-49cd-92a7-5852fd7fdf25",
-                "resourcePath": "shaders\\shd_pressureJacobi\\shd_pressureJacobi.yy",
+                "resourcePath": "shaders\\shd_jacobi\\shd_jacobi.yy",
                 "resourceType": "GMShader"
             }
         },

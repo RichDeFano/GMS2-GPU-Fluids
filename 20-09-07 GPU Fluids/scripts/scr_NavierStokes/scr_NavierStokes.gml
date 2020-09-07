@@ -59,11 +59,11 @@ surface_reset_target();
 //Estimate diffusion field with jacobi
 for(var i=0;i<jacobiIterations;i++) {
 	surface_set_target(surf_tempDiffusion);
-		shader_set(shd_pressureJacobi);
+		shader_set(shd_jacobi);
 			shader_set_uniform_f(alph,defaultViscAlpha);
 			shader_set_uniform_f(beta,defaultViscBeta);
-			texture_set_stage(shader_get_sampler_index(shd_pressureJacobi,"pressure_field"),surface_get_texture(surf_diffusion));
-			texture_set_stage(shader_get_sampler_index(shd_pressureJacobi,"divergence_field"),surface_get_texture(surf_diffusion));
+			texture_set_stage(shader_get_sampler_index(shd_jacobi,"pressure_field"),surface_get_texture(surf_diffusion));
+			texture_set_stage(shader_get_sampler_index(shd_jacobi,"divergence_field"),surface_get_texture(surf_diffusion));
 	          draw_surface(surf_diffusion, 0, 0);
 		shader_reset();
 	surface_reset_target();
@@ -77,8 +77,8 @@ for(var i=0;i<jacobiIterations;i++) {
 
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_addVelocity);
-		shader_set_uniform_f(ascalee,defaultScale);
-		shader_set_uniform_f(bscalee,defaultViscosity);
+		shader_set_uniform_f(ascaleD,defaultScale);
+		shader_set_uniform_f(bscaleD,defaultViscosity);
 		texture_set_stage(shader_get_sampler_index(shd_addVelocity,"vector_field"),surface_get_texture(surf_velocity));
 		texture_set_stage(shader_get_sampler_index(shd_addVelocity,"scalar_field"),surface_get_texture(surf_diffusion));
 		draw_surface(surf_velocity,0,0);
@@ -135,11 +135,11 @@ surface_reset_target();
 //Do some more jacobi iterations
 for(var i=0;i<jacobiIterations;i++) {
 	surface_set_target(surf_tempPressure);
-		shader_set(shd_pressureJacobi);
+		shader_set(shd_jacobi);
 			shader_set_uniform_f(alph,defaultJacobiAlpha);
 			shader_set_uniform_f(beta,defaultJacobiBeta);
-			texture_set_stage(shader_get_sampler_index(shd_pressureJacobi,"pressure_field"),surface_get_texture(surf_pressure));
-			texture_set_stage(shader_get_sampler_index(shd_pressureJacobi,"divergence_field"),surface_get_texture(surf_velocity));
+			texture_set_stage(shader_get_sampler_index(shd_jacobi,"pressure_field"),surface_get_texture(surf_pressure));
+			texture_set_stage(shader_get_sampler_index(shd_jacobi,"divergence_field"),surface_get_texture(surf_velocity));
 				draw_surface(surf_pressure, 0, 0);
 		shader_reset();		
 	surface_reset_target();
@@ -150,8 +150,8 @@ for(var i=0;i<jacobiIterations;i++) {
 
 //Pressure Boundaries
 surface_set_target(surf_tempPressure);
-	shader_set(shd_boundary);
-		texture_set_stage(shader_get_sampler_index(shd_boundary,"vector_field"),surface_get_texture(surf_pressure));
+	shader_set(shd_pressureBoundary);
+		texture_set_stage(shader_get_sampler_index(shd_pressureBoundary,"scalar_field"),surface_get_texture(surf_pressure));
 		shader_set_uniform_f(boundH,pBoundariesHeight);
 		shader_set_uniform_f(boundW,pBoundariesWidth);
 			draw_surface(surf_pressure,0,0);
@@ -173,8 +173,8 @@ surface_reset_target();
 	surface_copy(surf_tempVelocity,0,0,tempStorage);
 //Velocity boundaries
 surface_set_target(surf_tempVelocity);
-	shader_set(shd_boundary);
-		texture_set_stage(shader_get_sampler_index(shd_boundary,"vector_field"),surface_get_texture(surf_velocity));
+	shader_set(shd_velocityBoundary);
+		texture_set_stage(shader_get_sampler_index(shd_velocityBoundary,"vector_field"),surface_get_texture(surf_velocity));
 		shader_set_uniform_f(boundH,vBoundariesHeight);
 		shader_set_uniform_f(boundW,vBoundariesWidth);
 			draw_surface(surf_velocity,0,0);

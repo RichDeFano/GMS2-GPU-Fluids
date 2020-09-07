@@ -56,8 +56,8 @@ diss = shader_get_uniform(shd_advection,"dissipation");
 //Jacobi 
 
 
-alph = shader_get_uniform(shd_pressureJacobi,"alpha");
-beta = shader_get_uniform(shd_pressureJacobi,"rBeta");
+alph = shader_get_uniform(shd_jacobi,"alpha");
+beta = shader_get_uniform(shd_jacobi,"rBeta");
 //Divergence
 
 hScale = shader_get_uniform(shd_divergence,"rHalfScale");
@@ -78,8 +78,11 @@ vorForceCurl = shader_get_uniform(shd_vorticityForce,"curl");
 
 
 ///Boundary conditions
-boundW = shader_get_uniform(shd_boundary,"width");
-boundH = shader_get_uniform(shd_boundary,"height");
+boundW = shader_get_uniform(shd_velocityBoundary,"width");
+boundH = shader_get_uniform(shd_velocityBoundary,"height");
+
+pBoundW = shader_get_uniform(shd_pressureBoundary,"width");
+pBoundH = shader_get_uniform(shd_pressureBoundary,"height");
 
 
 
@@ -89,14 +92,16 @@ boundH = shader_get_uniform(shd_boundary,"height");
 ascale = shader_get_uniform(shd_addVelocity,"scaleA");
 bscale = shader_get_uniform(shd_addVelocity,"scaleB");
 
-ascalee = shader_get_uniform(shd_addDiffusion,"scaleA");
-bscalee  = shader_get_uniform(shd_addDiffusion,"scaleB");
+ascaleD = shader_get_uniform(shd_addDiffusion,"scaleA");
+bscaleD  = shader_get_uniform(shd_addDiffusion,"scaleB");
 
 ///Viewing fields
 bias = shader_get_uniform(shd_visualize,"bias");
 scale = shader_get_uniform(shd_visualize,"scale");
 maxval = shader_get_uniform(shd_visualize,"maxVal");
 alph = shader_get_uniform(shd_visualize,"alph");
+isVector = shader_get_uniform(shd_visualize,"isVector");
+isNegative = shader_get_uniform(shd_visualize,"isNegative");
 
 //gaussian splat
 

@@ -2,6 +2,6 @@
     "id": "beb97eba-0eb7-4880-9b39-80ef74a6d64b",
     "modelName": "GMShader",
     "mvc": "1.0",
-    "name": "shd_pressureJacobi",
+    "name": "shd_jacobi",
     "type": 1
 }

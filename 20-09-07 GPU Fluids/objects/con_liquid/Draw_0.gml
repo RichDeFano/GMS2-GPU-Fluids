@@ -18,11 +18,8 @@
 		surface_copy(surf_tempDensity,0,0,tempStorage);
 if (mousePressed == true){
 //Fluid
-//gpu_set_blendmode_ext(bm_one,bm_one);
-
 	surface_set_target(surf_tempDensity);
 		shader_set(shd_gaussianSplat)
-//			draw_set_blend_mode_ext(bm_one, bm_one);
 			shader_set_uniform_f(pt,mouse_x,mouse_y);
 			shader_set_uniform_f(r,48.0);
 			shader_set_uniform_f(fC,255.0,255.0,255.0);
@@ -35,7 +32,6 @@ if (mousePressed == true){
 		surface_copy(surf_tempDensity,0,0,tempStorage);
 
 //Velocity
-//gpu_set_blendmode
 	surface_set_target(surf_tempVelocity);
 		shader_set(shd_splat);
 			shader_set_uniform_f(vpt,mouse_x,mouse_y);
@@ -53,8 +49,8 @@ if (mousePressed == true){
 	
 //Velocity boundaries
 	surface_set_target(surf_tempVelocity);
-		shader_set(shd_boundary);
-			texture_set_stage(shader_get_sampler_index(shd_boundary,"vector_field"),surface_get_texture(surf_velocity));
+		shader_set(shd_velocityBoundary);
+			texture_set_stage(shader_get_sampler_index(shd_velocityBoundary,"vector_field"),surface_get_texture(surf_velocity));
 			shader_set_uniform_f(boundH,1.0);
 			shader_set_uniform_f(boundW,1.0);
 				draw_surface(surf_velocity,0,0);
