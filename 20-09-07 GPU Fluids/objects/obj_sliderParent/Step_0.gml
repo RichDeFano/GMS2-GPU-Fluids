@@ -1,7 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
+returnValue = value * maxValue;
 if !(mouse_check_button(mb_left)){
 	selected = false;
+
 }
 else
 {
@@ -16,5 +18,6 @@ else
 }
 
 if (selected == true){
-	value = clamp((mouse_x-x)/sprite_width,0.0,1.0);
+	value = clamp((mouse_x-x)/sprite_width,0.0,1.0)// * maxValue;
+		
 }

@@ -18,7 +18,7 @@ scr_createEmptySurfaces();
 //Advection
 defaultDissipation = 0.50;			//Range 0-1 - should be higher than velocity if its going to leave anything behind
 defaultVelocityDissipation = 0.20;	//Range 0-1
-defaultSize = 1.0;
+//defaultSize = 1.0;
 defaultScale = 1.0;
 //Step 2: Viscous Diffusion
 jacobiIterations = 50;				//Range 20-100
@@ -36,11 +36,11 @@ defaultCurl = 0.3;
 defaultJacobiAlpha = (-1.0);
 defaultJacobiBeta = (0.25);
 //Pressure Boundaries
-pBoundariesHeight = 1.0;
-pBoundariesWidth = 1.0;
+//pBoundariesHeight = room_h;
+//pBoundariesWidth = room_w;
 ///Velocity Boundaries
-vBoundariesHeight = 1.0;
-vBoundariesWidth = 1.0;
+//vBoundariesHeight = room_h;
+//vBoundariesWidth = room_w;
 
 
 ///
@@ -49,6 +49,7 @@ vBoundariesWidth = 1.0;
 
 size = shader_get_uniform(shd_advection,"rSize");
 scale = shader_get_uniform(shd_advection,"rScale");
+
 time = shader_get_uniform(shd_advection,"timestep");
 diss = shader_get_uniform(shd_advection,"dissipation");
 //Viscous Diffusion

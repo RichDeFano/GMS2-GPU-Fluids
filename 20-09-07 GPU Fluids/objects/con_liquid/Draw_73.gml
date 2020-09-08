@@ -84,5 +84,6 @@ shader_set(shd_visualize)
                 break;
 		
         }
-stepTime += stepTime;
+//stepTime += stepTime;
+//draw_text(600,200,stepTime);
 shader_reset();
