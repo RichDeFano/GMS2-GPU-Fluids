@@ -1,11 +1,15 @@
-con_liquid.defaultDissipation = materialDissipation.returnValue;
-con_liquid.defaultVelocityDissipation = velocityDissipation.returnValue;
-con_liquid.defaultViscosity = viscosity.returnValue;
-con_liquid.stepTime = time.returnValue;
-con_liquid.defaultSize = size.returnValue;
-con_liquiddefaultScale = scale.returnValue
-
-//instance_create_layer(10,30,"GUI",obj_sliderParent);
+con_liquid.velocityDissipation = velocityDissipation.returnValue;
+con_liquid.velocityScale = velocityScale.returnValue;
+con_liquid.materialDissipation = materialDissipation.returnValue;
+con_liquid.materialScale = materialScale.returnValue;
+con_liquid.diffusionA = diffusionA.returnValue;
+con_liquid.diffusionB = diffusionB.returnValue;
+con_liquid.velocityPart = velocityPart.returnValue;
+con_liquid.viscosity = viscosity.returnValue;
+con_liquid.vorticitySize = vorticitySize.returnValue;
+con_liquid.vorticityScale = vorticityScale.returnValue;
+con_liquid.vorticityFSize = vorticityFSize.returnValue;
+con_liquid.vorticityFScale = vorticityFScale.returnValue;
 
 
 

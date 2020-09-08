@@ -7,10 +7,10 @@
 
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_advection);
-		shader_set_uniform_f(size,defaultSize/room_w,defaultSize/room_h);
-		shader_set_uniform_f(scale,defaultScale/(room_w*room_h));
+		//shader_set_uniform_f(size,defaultSize/room_w,defaultSize/room_h);
+		shader_set_uniform_f(scale,velocityScale);
 		//shader_set_uniform_f(time,stepTime);
-		shader_set_uniform_f(diss,defaultVelocityDissipation);
+		shader_set_uniform_f(diss,velocityDissipation);
 		texture_set_stage(shader_get_sampler_index(shd_advection, "velocity_field"), surface_get_texture(surf_velocity));
 		texture_set_stage(shader_get_sampler_index(shd_advection, "advected_field"), surface_get_texture(surf_velocity));
 			draw_surface(surf_velocity, 0, 0);
@@ -25,10 +25,10 @@ surface_reset_target();
 //1.5: Advection of an Ink
 surface_set_target(surf_tempDensity);
 	shader_set(shd_advection);
-		shader_set_uniform_f(size,defaultSize/room_w,defaultSize/room_h);
-		shader_set_uniform_f(scale,defaultScale/(room_w*room_h));
+		//shader_set_uniform_f(size,defaultSize/room_w,defaultSize/room_h);
+		shader_set_uniform_f(scale,materialScale);
 		//shader_set_uniform_f(time,stepTime);
-		shader_set_uniform_f(diss,defaultDissipation);
+		shader_set_uniform_f(diss,materialDissipation);
 		texture_set_stage(shader_get_sampler_index(shd_advection, "velocity_field"), surface_get_texture(surf_velocity));
 		texture_set_stage(shader_get_sampler_index(shd_advection, "advected_field"), surface_get_texture(surf_density));
 			draw_surface(surf_density, 0, 0);
@@ -45,8 +45,8 @@ surface_reset_target();
 //Add velocity to the diffusion field
 surface_set_target(surf_tempDiffusion);
 	shader_set(shd_addDiffusion);
-		shader_set_uniform_f(ascale,defaultScale);
-		shader_set_uniform_f(bscale,defaultScale);
+		shader_set_uniform_f(ascale,diffusionA);
+		shader_set_uniform_f(bscale,diffusionB);
 		texture_set_stage(shader_get_sampler_index(shd_addDiffusion,"vector_field"),surface_get_texture(surf_velocity));
 		texture_set_stage(shader_get_sampler_index(shd_addDiffusion,"scalar_field"),surface_get_texture(surf_diffusion));
 		draw_surface(surf_diffusion,0,0);
@@ -77,8 +77,8 @@ for(var i=0;i<jacobiIterations;i++) {
 
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_addVelocity);
-		shader_set_uniform_f(ascale,defaultScale);
-		shader_set_uniform_f(bscale,defaultViscosity);
+		shader_set_uniform_f(ascale,velocityPart);
+		shader_set_uniform_f(bscale,viscosity);
 		texture_set_stage(shader_get_sampler_index(shd_addVelocity,"vector_field"),surface_get_texture(surf_velocity));
 		texture_set_stage(shader_get_sampler_index(shd_addVelocity,"scalar_field"),surface_get_texture(surf_diffusion));
 		draw_surface(surf_velocity,0,0);
@@ -92,8 +92,8 @@ surface_reset_target();
 
 surface_set_target(surf_tempVorticity)
 	shader_set(shd_vorticity);
-		shader_set_uniform_f(vorSize,defaultScale/2.0);
-		shader_set_uniform_f(vorScale,defaultScale);
+		shader_set_uniform_f(vorSize,vorticitySize);
+		shader_set_uniform_f(vorScale,vorticityScale);
 		texture_set_stage(shader_get_sampler_index(shd_vorticity,"velocity_field"),surface_get_texture(surf_velocity));
 			draw_surface(surf_vorticity,0,0);
 	shader_reset();
@@ -105,8 +105,8 @@ surface_reset_target();
 //Vorticity Force Confinement
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_vorticityForce);
-		shader_set_uniform_f(vorForceSize,defaultSize/2.0,defaultSize/2.0);
-		shader_set_uniform_f(vorForceScale, defaultScale);
+		shader_set_uniform_f(vorForceSize,vorticityFSize);
+		shader_set_uniform_f(vorForceScale, vorticityFScale);
 		//shader_set_uniform_f(vorForceTime,stepTime);
 		shader_set_uniform_f(vorForceEp, defaultEpsillon);
 		shader_set_uniform_f(vorForceCurl,defaultCurl,defaultCurl);
@@ -175,7 +175,7 @@ surface_reset_target();
 surface_set_target(surf_tempVelocity);
 	shader_set(shd_velocityBoundary);
 		texture_set_stage(shader_get_sampler_index(shd_velocityBoundary,"vector_field"),surface_get_texture(surf_velocity));
-		shader_set_uniform_f(boundH,room_h;
+		shader_set_uniform_f(boundH,room_h);
 		shader_set_uniform_f(boundW,room_w);
 			draw_surface(surf_velocity,0,0);
 	shader_reset();

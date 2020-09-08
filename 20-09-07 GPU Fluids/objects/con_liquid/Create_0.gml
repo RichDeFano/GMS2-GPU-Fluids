@@ -16,31 +16,30 @@ scr_createEmptySurfaces();
 
 //////SLIDER VARIABLES
 //Advection
-defaultDissipation = 0.50;			//Range 0-1 - should be higher than velocity if its going to leave anything behind
-defaultVelocityDissipation = 0.20;	//Range 0-1
-//defaultSize = 1.0;
-defaultScale = 1.0;
 //Step 2: Viscous Diffusion
 jacobiIterations = 50;				//Range 20-100
 defaultViscosity = 0.001;
 defaultViscAlpha = 1.0;
 defaultViscBeta = 0.20;
-//var defaultAScale = 1.0;
-//var defaultBScale = 1.0;
 //Vorticity Confinement
-//var defaultVorticityScale = 0.5;
-//var defaultVorticitySize = 1.0;
 defaultEpsillon = 0.00024414;
 defaultCurl = 0.3;
 //Projection
 defaultJacobiAlpha = (-1.0);
 defaultJacobiBeta = (0.25);
-//Pressure Boundaries
-//pBoundariesHeight = room_h;
-//pBoundariesWidth = room_w;
-///Velocity Boundaries
-//vBoundariesHeight = room_h;
-//vBoundariesWidth = room_w;
+////GUI
+velocityDissipation = 1.0;//velocityDissipation.returnValue;
+velocityScale = 1.0;//velocityScale.returnValue;
+materialDissipation = 1.0;//materialDissipation.returnValue;
+materialScale = 1.0;//aterialScale.returnValue;
+diffusionA = 1.0;//diffusionA.returnValue;
+diffusionB = 1.0;//diffusionB.returnValue;
+velocityPart = 1.0;//velocityPart.returnValue;
+viscosity = 0.99;//viscosity.returnValue;
+vorticitySize = 1.0;//vorticitySize.returnValue;
+vorticityScale = 1.0;//vorticityScale.returnValue;
+vorticityFSize = 1.0;//vorticityFSize.returnValue;
+vorticityFScale = 1.0;//vorticityFScale.returnValue;
 
 
 ///

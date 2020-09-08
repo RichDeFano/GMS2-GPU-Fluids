@@ -74,7 +74,7 @@
             "Key": "13978aea-9d7a-42f5-9cc0-620987ea7612",
             "Value": {
                 "id": "c0096be1-9b4e-40d2-9c40-4952ddf84371",
-                "resourcePath": "sprites\\sprite3\\sprite3.yy",
+                "resourcePath": "sprites\\spr_guiBG\\spr_guiBG.yy",
                 "resourceType": "GMSprite"
             }
         },
