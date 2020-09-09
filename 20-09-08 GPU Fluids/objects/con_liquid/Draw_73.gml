@@ -13,6 +13,20 @@
 			shader_reset();
 				//surface_reset_target();
                 break;
+				case DISPLAY_FIELD.VELOCITY:
+                texture_set_stage(shader_get_sampler_index(shd_visualize,"vector_field"),surface_get_texture(surf_velocity));
+                shader_set_uniform_f(maxval, 32.0);
+                shader_set_uniform_f(bias, 0.5, 0.5, 0.5);
+				shader_set_uniform_f(scale,1.0/room_w,1.0/room_h);
+				shader_set_uniform_f(alph,1.0);
+				shader_set_uniform_f(isVector,true);
+				shader_set_uniform_f(isNegative,true);
+				draw_surface(surf_velocity,0,0);
+				draw_text(0,0,"DISPLAY MODE: VELOCITY");
+				//shader_reset();
+				//surface_reset_target();
+                break;
+				/*
             case DISPLAY_FIELD.VELOCITY:
 			shader_set(shd_visualiseVector);
                 texture_set_stage(shader_get_sampler_index(shd_visualiseVector,"vector_field"),surface_get_texture(surf_velocity));
@@ -21,6 +35,7 @@
 			shader_reset();
 				//surface_reset_target();
                 break;
+				*/
             case DISPLAY_FIELD.PRESSURE:
 			shader_set(shd_visualiseScalar);
                 texture_set_stage(shader_get_sampler_index(shd_visualiseScalar,"scalar_field"),surface_get_texture(surf_density));
