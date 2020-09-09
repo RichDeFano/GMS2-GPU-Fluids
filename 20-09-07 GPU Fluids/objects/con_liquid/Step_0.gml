@@ -21,6 +21,9 @@ if (keyboard_check_released(ord("T")))
 if (keyboard_check_released(ord("Y")))
 {DISPLAY_FIELD = DISPLAY_FIELD.DIFFUSION;}
 
+if (keyboard_check_released(ord("U")))
+{DISPLAY_FIELD = DISPLAY_FIELD.TEMPERATURE;}
+
 
 if (mouse_check_button(mb_any)){
 	mousePressed = true;

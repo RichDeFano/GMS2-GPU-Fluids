@@ -183,5 +183,48 @@ surface_reset_target();
 	surface_copy(tempStorage,0,0,surf_velocity);
 	surface_copy(surf_velocity,0,0,surf_tempVelocity);
 	surface_copy(surf_tempVelocity,0,0,tempStorage);
-	
+////////////////////////
+//Step 4: Convection
+/////////////////////////////
+//Calculate buoyant forces
+surface_set_target(surf_tempTemperature)
+	shader_set(shd_convection);
+		texture_set_stage(shader_get_sampler_index(shd_convection,"temperature_field"),surface_get_texture(surf_temperature));
+		draw_surface(surf_temperature,0,0);
+	shader_reset();
+surface_reset_target();
+	surface_copy(tempStorage,0,0,surf_temperature);
+	surface_copy(surf_temperature,0,0,surf_tempTemperature);
+	surface_copy(surf_tempTemperature,0,0,tempStorage);
+//Estimate diffusion field with jacobi
+for(var i=0;i<jacobiIterations;i++) {
+	surface_set_target(surf_tempTemperature);
+		shader_set(shd_jacobi);
+			shader_set_uniform_f(alph,defaultViscAlpha);
+			shader_set_uniform_f(beta,defaultViscBeta);
+			texture_set_stage(shader_get_sampler_index(shd_jacobi,"pressure_field"),surface_get_texture(surf_temperature));
+			texture_set_stage(shader_get_sampler_index(shd_jacobi,"divergence_field"),surface_get_texture(surf_temperature));
+	          draw_surface(surf_temperature, 0, 0);
+		shader_reset();
+	surface_reset_target();
+		surface_copy(tempStorage,0,0,surf_temperature);
+		surface_copy(surf_temperature,0,0,surf_tempTemperature);
+		surface_copy(surf_tempTemperature,0,0,tempStorage);
+}
+
+
+//Add back into velocity field with viscosity
+surface_set_target(surf_tempVelocity);
+	shader_set(shd_addBuoyancy);
+		shader_set_uniform_f(ascale,velocityPart);
+		shader_set_uniform_f(bscale,velocityPart);
+		texture_set_stage(shader_get_sampler_index(shd_addVelocity,"vector_field"),surface_get_texture(surf_velocity));
+		texture_set_stage(shader_get_sampler_index(shd_addVelocity,"scalar_field"),surface_get_texture(surf_temperature));
+		draw_surface(surf_velocity,0,0);
+	shader_reset();
+surface_reset_target();
+	surface_copy(tempStorage,0,0,surf_velocity);
+	surface_copy(surf_velocity,0,0,surf_tempVelocity);
+	surface_copy(surf_tempVelocity,0,0,tempStorage);
+
 	

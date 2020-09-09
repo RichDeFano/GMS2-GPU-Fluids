@@ -95,6 +95,9 @@ bscale = shader_get_uniform(shd_addVelocity,"scaleB");
 ascaleD = shader_get_uniform(shd_addDiffusion,"scaleA");
 bscaleD  = shader_get_uniform(shd_addDiffusion,"scaleB");
 
+ascaleB = shader_get_uniform(shd_addBuoyancy,"scaleA");
+bscaleB  = shader_get_uniform(shd_addBuoyancy,"scaleB");
+
 ///Viewing fields
 bias = shader_get_uniform(shd_visualize,"bias");
 scale = shader_get_uniform(shd_visualize,"scale");

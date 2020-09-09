@@ -199,6 +199,14 @@
             }
         },
         {
+            "Key": "77245d02-dc17-4b73-b85e-4e9a173f0ff2",
+            "Value": {
+                "id": "16da9947-5f00-43e4-af35-95123e120beb",
+                "resourcePath": "shaders\\shd_convection\\shd_convection.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "7c136aec-8fc6-468d-be5f-119a22a5b7f0",
             "Value": {
                 "id": "a2bb2166-7c65-4ef4-9763-8b099270b8c7",
@@ -231,6 +239,14 @@
             }
         },
         {
+            "Key": "9067b917-534e-4abd-979d-c2694fefdade",
+            "Value": {
+                "id": "7eb8b9d6-1a55-41d3-85f4-2332319afefc",
+                "resourcePath": "views\\9067b917-534e-4abd-979d-c2694fefdade.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "92c4dbaa-a897-4c20-a242-f171f693c96e",
             "Value": {
                 "id": "9ef187cd-3773-4775-b04f-0e7ebf761218",
@@ -259,6 +275,14 @@
             "Value": {
                 "id": "e22d97ef-d476-427f-9957-314e280976ac",
                 "resourcePath": "shaders\\shd_gaussianSplat\\shd_gaussianSplat.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
+            "Key": "a82b8ebe-dc91-4862-a74f-535d25e9216d",
+            "Value": {
+                "id": "88f61d3d-6526-4b86-8793-85fc7e8810d4",
+                "resourcePath": "shaders\\shd_addBuoyancy\\shd_addBuoyancy.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -324,6 +348,14 @@
                 "id": "b712a8be-272a-44c1-ab5e-d2ac928a8a47",
                 "resourcePath": "scripts\\scr_swapFields\\scr_swapFields.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "caaf16ea-a6e6-491c-8002-55af072a56c4",
+            "Value": {
+                "id": "bc620355-a585-4183-8b96-c7bf8d283eff",
+                "resourcePath": "shaders\\shd_addScalarToFluid\\shd_addScalarToFluid.yy",
+                "resourceType": "GMShader"
             }
         },
         {
@@ -431,6 +463,14 @@
             }
         },
         {
+            "Key": "ea5710cc-c00e-462e-94d5-0e6c953443d7",
+            "Value": {
+                "id": "c813ead1-c453-4393-a679-71253e8d3c53",
+                "resourcePath": "views\\ea5710cc-c00e-462e-94d5-0e6c953443d7.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "f418569b-3bdd-4706-a0e4-364317f54032",
             "Value": {
                 "id": "a74bf111-fad3-49d3-bbe4-d863f220bdbf",
@@ -448,15 +488,15 @@
         }
     ],
     "script_order": [
-        "2c294b9f-2348-450a-b03f-08dfb994163d",
-        "c0340d9e-4536-435c-b4e6-e9aaf7dfc68b",
-        "7253d62d-012b-471c-b6ec-8094ee997039",
-        "20b7218b-77fd-44c2-b5f2-e23f4bc10a85",
-        "b50741c4-a0e5-4318-8b11-260455dfcbbb",
-        "9a2d1fcc-e35f-45bb-ae8c-674eb0d985c7",
         "de73678c-6c2d-4c2b-97ce-ac274f3f480d",
         "8a6f4e32-0175-4aa4-a3fd-24634392f30b",
-        "31a5f9df-42ea-4f41-a953-a6320532f962"
+        "31a5f9df-42ea-4f41-a953-a6320532f962",
+        "2c294b9f-2348-450a-b03f-08dfb994163d",
+        "7253d62d-012b-471c-b6ec-8094ee997039",
+        "c0340d9e-4536-435c-b4e6-e9aaf7dfc68b",
+        "9a2d1fcc-e35f-45bb-ae8c-674eb0d985c7",
+        "b50741c4-a0e5-4318-8b11-260455dfcbbb",
+        "20b7218b-77fd-44c2-b5f2-e23f4bc10a85"
     ],
     "tutorial": ""
 }

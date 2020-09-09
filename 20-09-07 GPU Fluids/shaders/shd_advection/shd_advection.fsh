@@ -26,7 +26,7 @@ void main()
 {
 	vec2 coords = gl_FragCoord.xy;
 	vec2 pos = rSize * (coords - timestep * rScale * getVectorFromTexture(texture2D(velocity_field, rSize * coords)));
-	vec4 color = dissipation * texture2D( advected_field, pos);
+	vec4 color = dissipation * texture2D(advected_field, pos);
 	gl_FragColor = color;// * texture2D( gm_BaseTexture, coords );
 	/*
 	vec2 coords = gl_FragCoord.xy;

@@ -33,14 +33,7 @@ void main() {
 	 vec2 coords = vec2(gl_FragCoord.xy);
     vec4 sourceColor = texture2D(scalar_field, coords);
 	vec4 color;
-	/*
-	if (sourceColor == vec4(0.0,0.0,0.0,0.0))
-	{
-    color = vec4(mix(sourceColor.xyz, fillColor, gauss(point - coords, radius)), 0.0);
-	}
-	else
-	{
-	*/
+
 	color = vec4(mix(sourceColor.xyz, fillColor, gauss(point - coords, radius)), gauss(point - coords, radius));
 	
 	// vec4 color = vec4(mix(sourceColor.xyz, fillColor, gauss(point - coords, radius)), sourceColor.w+0.5);

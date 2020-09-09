@@ -82,6 +82,19 @@ shader_set(shd_visualize)
 				//shader_reset();
 				//surface_reset_target();
                 break;
+			case DISPLAY_FIELD.TEMPERATURE:
+                texture_set_stage(shader_get_sampler_index(shd_visualize,"vector_field"),surface_get_texture(surf_vorticity));
+                shader_set_uniform_f(maxval, 4.0);
+                shader_set_uniform_f(bias, 0.5, 0.5, 0.5);
+				shader_set_uniform_f(scale,1.0/room_w,1.0/room_h);
+				shader_set_uniform_f(alph,1.0);
+				shader_set_uniform_f(isVector,false);
+				shader_set_uniform_f(isNegative,false);
+				draw_surface(surf_temperature,0,0);
+				draw_text(0,0,"DISPLAY MODE: TEMPERATURE");
+				//shader_reset();
+				//surface_reset_target();
+                break;
 		
         }
 //stepTime += stepTime;

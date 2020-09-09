@@ -16,6 +16,8 @@
 	surface_copy(tempStorage,0,0,surf_density);
 		surface_copy(surf_density,0,0,surf_tempDensity);
 		surface_copy(surf_tempDensity,0,0,tempStorage);
+if ((mouse_x > 160) || (mouse_y > 290))
+{
 if (mousePressed == true){
 //Fluid
 	surface_set_target(surf_tempDensity);
@@ -62,6 +64,8 @@ if (mousePressed == true){
 	
 		//stepTime++;
 }
+}
+
 /*
 else
 {
