@@ -51,15 +51,37 @@ vec4 setScalarToTextureSigned(float scalar){
 ////////////////////////////////////////////////////////////
 
 
-float magnitude(vec2 inVec){
-	return clamp(sqrt((inVec.x*inVec.x) + (inVec.y*inVec.y))/10.0,0.0,1.0);
-}
-
 void main()
 {
+	vec4 white = vec4(255.0,255.0,255.0,0.1);
 	vec2 coords = gl_FragCoord.xy;
-	vec2 vel = getVectorFromTexture(texture2D(vector_field,coords));	
-	float mag = magnitude(vel);
-	gl_FragColor = setVectorToTexture(vel) * texture2D( gm_BaseTexture, v_vTexcoord );
+	vec2 oldVector = getVectorFromTexture(texture2D(vector_field,coords));
+	vec4 tempTex = setVectorToTexture(oldVector);
+	vec2 vector = getVectorFromTexture(tempTex);
 	
+	float magnitude = sqrt((vector.x * vector.x) + (vector.y * vector.y));
+	
+	if ((magnitude < 0.1) && (magnitude > -0.1))
+	{gl_FragColor = texture2D(gm_BaseTexture,v_vTexcoord);}
+	else
+	{gl_FragColor = (magnitude * white) * texture2D(gm_BaseTexture, v_vTexcoord);}
 }
+/*
+	if ((vector.xy > -0.1) && (vector.xy < 0.1))
+	{gl_FragColor = texture2D(gm_BaseTexture,v_vTexcoord);}
+	else
+	{gl_FragColor = (vector.xy * white) * texture2D(gm_BaseTexture, v_vTexcoord);}
+	/*
+	vec2 coords = gl_FragCoord.xy;
+		vec4 white = vec4(255.0,255.0,255.0,0.1);
+		
+	vec2 testVel = vec2(2.0,5.0);
+	//vec2 oldVel = abs(getScalarFromTextureSigned(texture2D(scalar_field,coords)));//abs(-8.0);
+	vec4 tempTex = setVectorToTexture(testVel);
+	vec2 velocity =  getVectorFromTexture(tempTex);
+	
+	float magnitude = sqrt((velocity.x*velocity.x) + (velocity.y*velocity.y));
+	
+	gl_FragColor = (magnitude * white);// * texture2D(gm_BaseTexture, v_vTexcoord);
+}
+*/

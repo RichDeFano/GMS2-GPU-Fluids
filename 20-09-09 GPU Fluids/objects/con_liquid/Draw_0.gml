@@ -1,12 +1,16 @@
 /// @description Insert description here
 // You can write your code in this editor
 //gpu_set_blendmode(bm_add);
+
+
+
 if (created == false){
 scr_createEmptySurfaces();
 created = true;
 }
 else
 {scr_checkSurfaces();}
+
 
 
 if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
@@ -16,7 +20,7 @@ if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
 	surface_set_target(surf_tempDensity);
 		shader_set(shd_addMaterial)
 			shader_set_uniform_f(pt,mouse_x,mouse_y);
-			shader_set_uniform_f(r,48.0);
+			shader_set_uniform_f(r,24.0);
 			//shader_set_uniform_f(fC,255.0,255.0,255.0);
 			texture_set_stage(shader_get_sampler_index(shd_addMaterial,"scalar_field"),surface_get_texture(surf_density));
 				draw_surface(surf_density,0,0);		
@@ -41,8 +45,7 @@ if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
 		surface_copy(tempStorage,0,0,surf_velocity);
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
-		
-		
+/*
 //Velocity boundaries
 	surface_set_target(surf_tempVelocity);
 		shader_set(shd_velocityBoundary);
@@ -55,7 +58,8 @@ if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
 		surface_copy(tempStorage,0,0,surf_velocity);
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
-	
+		*/
+	scr_NavierStokes();
 
 }
 else

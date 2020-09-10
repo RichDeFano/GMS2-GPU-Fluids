@@ -1,3 +1,7 @@
+var signedCol = make_colour_rgb(128.0,0.0,0.0);
+
+
+
 surf_velocity = surface_create(room_width,room_height);
 surface_set_target(surf_velocity);
 draw_clear_alpha(c_black,0);
@@ -9,11 +13,11 @@ surface_reset_target();
 
 surf_density = surface_create(room_width,room_height);
 surface_set_target(surf_density);
-draw_clear_alpha(c_black,0);
+draw_clear_alpha(signedCol,0);
 surface_reset_target();
 surf_tempDensity = surface_create(room_width,room_height);
 surface_set_target(surf_tempDensity);
-draw_clear_alpha(c_black,0);
+draw_clear_alpha(signedCol,0);
 surface_reset_target();
 
 surf_pressure = surface_create(room_width,room_height);

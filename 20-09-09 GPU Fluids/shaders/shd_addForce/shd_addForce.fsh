@@ -65,7 +65,21 @@ float magnitude(vec2 inVec){
 }
 
 void main() {
+	vec2 coords = vec2(gl_FragCoord.xy);
+	if (distance(point,coords) < radius)
+	{
+    vec4 sourceColor = texture2D(vector_field, coords);
+    gl_FragColor = vec4(mix(sourceColor.xyz, vec3(255.0,0.0,0.0), gauss(point - coords, radius)), 0.0);// * texture2D( gm_BaseTexture, v_vTexcoord );
+	}
+	else
+	{gl_FragColor = texture2D(vector_field,coords);}
 	
+	/*
+	vec2 coords = vec2(gl_FragCoord.xy);
+    vec4 sourceColor = texture2D(vector_field, coords);
+
+    vec2 color = mix(sourceColor.xy, vec2(255.0,255.0), gauss(point - coords, radius));// * texture2D( gm_BaseTexture, v_vTexcoord );
+	gl_FragColor = setVectorToTexture(color);
 	/*
 	vec2 coords = vec2(gl_FragCoord.xy);
     vec2 sourceVec = getVectorFromTexture(texture2D(vector_field, coords));
@@ -79,20 +93,21 @@ void main() {
 	{
 	gl_FragColor = setVectorToTexture(sourceVec);
 	}
-	*/
 	
 	
+	
+	/*
 	vec2 coords = vec2(gl_FragCoord.xy);
     vec4 sourceColor = texture2D(vector_field, coords);
 	vec4 color;
-    if (distance(coords, point) < radius) {
+    if (distance(point,coords) < radius) {
         color = vec4(255.0,255.0,0.0, 0.5) * sourceColor;
     } else {
         color = sourceColor;
     }
 	
 	gl_FragColor = color;// * texture2D( gm_BaseTexture, v_vTexcoord );
-	
+	*/
 
 }
 	

@@ -21,7 +21,7 @@ vec2 getVectorFromTexture(vec4 colorValues){
 
 vec4 setVectorToTexture(vec2 vector){
 	vec2 normalizedVector = ((vector/VECTOR_RANGE) + (128.0))/128.0;
-	vec4 newVTexture = vec4(normalizedVector,0.0,0.0);
+	vec4 newVTexture = vec4(normalizedVector,0.0,1.0);
 	return newVTexture;
 }
 
@@ -33,19 +33,19 @@ float getScalarFromTextureUnsigned(vec4 colorValues){
 
 vec4 setScalarToTextureUnsigned(float scalar){
 	float normalizedScalar = (scalar/SCALAR_RANGE) * 255.0;
-	vec4 newSTexture = vec4(normalizedScalar,0.0,0.0,0.0);
+	vec4 newSTexture = vec4(normalizedScalar,0.0,0.0,scalar/SCALAR_RANGE);
 	return newSTexture;
 }
 
 float getScalarFromTextureSigned(vec4 colorValues){
-	float newScalar = (colorValues.x - 128.0)/128.0;
+	float newScalar = (colorValues.r - 128.0)/128.0;
 	newScalar = (newScalar * SCALAR_RANGE);
 	return newScalar;
 }
 
 vec4 setScalarToTextureSigned(float scalar){
-	float normalizedScalar = ((scalar/SCALAR_RANGE) + 128.0)/128.0;
-	vec4 newSTexture = vec4(normalizedScalar,0.0,0.0,0.0);
+	float normalizedScalar = ((scalar/SCALAR_RANGE) * 128.0) + 128.0;
+	vec4 newSTexture = vec4(normalizedScalar,0.0,0.0,abs(scalar/SCALAR_RANGE));
 	return newSTexture;
 }
 ////////////////////////////////////////////////////////////
@@ -53,26 +53,58 @@ vec4 setScalarToTextureSigned(float scalar){
 void main()
 {
 	vec2 coords = gl_FragCoord.xy;
-	vec4 red = vec4(255.0,0.0,0.0,0.5);
-	vec4 orange = vec4(255.0,128.0,0.0,0.5);
-	vec4 yellow = vec4(255.0,255.0,0.0,0.5);
-	vec4 green = vec4(128.0,255.0,0.0,0.5);
-	vec4 blue = vec4(0.0,255.0,255.0,0.5);
-	vec4 purple = vec4(128.0,0.0,255.0,0.5);
-	vec4 white = vec4(255.0,255.0,255.0,0.5);
+	vec4 red = vec4(255.0,0.0,0.0,0.1);
+	vec4 orange = vec4(255.0,128.0,0.0,0.1);
+	vec4 yellow = vec4(255.0,255.0,0.0,0.1);
+	vec4 green = vec4(128.0,255.0,0.0,0.1);
+	vec4 blue = vec4(0.0,255.0,255.0,0.1);
+	vec4 purple = vec4(128.0,0.0,255.0,0.1);
+	vec4 white = vec4(255.0,255.0,255.0,0.1);
+/*	
+	float oldScalar = abs(getScalarFromTextureSigned(texture2D(scalar_field,coords)));//abs(-8.0);
+	vec4 tempTex = setScalarToTextureSigned(oldScalar);
+	float scalar = getScalarFromTextureSigned(tempTex);
 	
-	
-	float scalar = texture2D(scalar_field,coords).r;//getScalarFromTextureUnsigned(texture2D(scalar_field,coords));
+	gl_FragColor = (scalar * white) * texture2D(gm_BaseTexture, v_vTexcoord);
+}
+////////////
+	float scalar = 10.0;//getScalarFromTextureUnsigned(texture2D(scalar_field,coords));
 	if (isNegative == true)
 	{
-		scalar = texture2D(scalar_field,coords).r;
+		scalar = getScalarFromTextureSigned(texture2D(scalar_field,coords));
 	}
-	
-	if (scalar > 0.0)
-		{gl_FragColor = purple * texture2D( gm_BaseTexture, v_vTexcoord );}// * texture2D( gm_BaseTexture, v_vTexcoord );}
+	*/
+	float oldScalar = getScalarFromTextureUnsigned(texture2D(scalar_field,coords));
+	vec4 tempTex = setScalarToTextureUnsigned(oldScalar);
+	float scalar = getScalarFromTextureUnsigned(tempTex);
+	if (isNegative == true)
+	{
+		 oldScalar = abs(getScalarFromTextureSigned(texture2D(scalar_field,coords)));
+		 tempTex = setScalarToTextureSigned(oldScalar);
+		 scalar = getScalarFromTextureSigned(tempTex);
+	}
+
+	if ((scalar < 0.1) && (scalar > -0.1))
+	{gl_FragColor = texture2D(gm_BaseTexture,v_vTexcoord);}
 	else
-		{gl_FragColor = red * texture2D( gm_BaseTexture, v_vTexcoord );}// * texture2D( gm_BaseTexture, v_vTexcoord );}
+	{gl_FragColor = (scalar * white) * texture2D(gm_BaseTexture, v_vTexcoord);}
 }
+	/*
+			if ((scalar < -7.0) && (scalar > -10.0))
+			{gl_FragColor = (scalar * purple) * texture2D(gm_BaseTexture, v_vTexcoord);}
+		else if ((scalar < -3.0) && (scalar > -7.0))
+			{gl_FragColor = (scalar * blue) * texture2D(gm_BaseTexture, v_vTexcoord);}
+		else if ((scalar < 0.0) && (scalar > -3.0))
+			{gl_FragColor = (scalar * green) * texture2D(gm_BaseTexture, v_vTexcoord);}
+		else if ((scalar < 3.0) && (scalar > 0.0))
+			{gl_FragColor = (scalar * yellow) * texture2D(gm_BaseTexture, v_vTexcoord);}
+		else if ((scalar < 7.0) && (scalar > 3.0))
+			{gl_FragColor = (scalar * orange) * texture2D(gm_BaseTexture, v_vTexcoord);}
+		else if ((scalar < 10.0) && (scalar > 7.0))
+			{gl_FragColor = (scalar * red) * texture2D(gm_BaseTexture, v_vTexcoord);}
+		else
+			{gl_FragColor = (scalar * white)  * texture2D(gm_BaseTexture, v_vTexcoord);}
+			*/
 	
 	/*
 	if ((scalar < -7.0) && (scalar > -10.0))

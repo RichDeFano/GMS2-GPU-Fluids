@@ -16,7 +16,7 @@ uniform sampler2D vector_field;
 
 
 void main() {
-	vec4 col = vec4(bias, 1.0) + (texture2D(vector_field, scale * gl_FragCoord.xy) / maxVal);
+	vec4 col = vec4(bias, 1.0) * (texture2D(vector_field, scale * gl_FragCoord.xy) / maxVal);
 	gl_FragColor = col * texture2D( gm_BaseTexture, v_vTexcoord );
 	/*
 	vec2 coords = gl_FragCoord.xy;
