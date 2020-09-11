@@ -2,27 +2,21 @@
 // You can write your code in this editor
 //gpu_set_blendmode(bm_add);
 
-
-
-if (created == false){
-scr_createEmptySurfaces();
-created = true;
-}
-else
-{scr_checkSurfaces();}
+//scr_checkSurfaces();
 
 
 
-if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
-{
+//if (mousePressed == true){
+	//splat the ink by updating the density field
+	
+if (mousePressed == true){
 //Fluid
-
 	surface_set_target(surf_tempDensity);
-		shader_set(shd_addMaterial)
+		shader_set(shd_gaussianSplat)
 			shader_set_uniform_f(pt,mouse_x,mouse_y);
-			shader_set_uniform_f(r,24.0);
-			//shader_set_uniform_f(fC,255.0,255.0,255.0);
-			texture_set_stage(shader_get_sampler_index(shd_addMaterial,"scalar_field"),surface_get_texture(surf_density));
+			shader_set_uniform_f(r,48.0);
+			shader_set_uniform_f(fC,255.0,255.0,255.0);
+			texture_set_stage(shader_get_sampler_index(shd_gaussianSplat,"scalar_field"),surface_get_texture(surf_density));
 				draw_surface(surf_density,0,0);		
 		shader_reset();
 	surface_reset_target();
@@ -31,14 +25,12 @@ if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
 		surface_copy(surf_tempDensity,0,0,tempStorage);
 
 //Velocity
-/*
-
 	surface_set_target(surf_tempVelocity);
-		shader_set(shd_addForce);
+		shader_set(shd_splat);
 			shader_set_uniform_f(vpt,mouse_x,mouse_y);
 			shader_set_uniform_f(vr,48.0);
-			//shader_set_uniform_f(vfC,255.0,255.0,255.0);
-			texture_set_stage(shader_get_sampler_index(shd_addForce,"vector_field"),surface_get_texture(surf_velocity));
+			shader_set_uniform_f(vfC,255.0,255.0,255.0);
+			texture_set_stage(shader_get_sampler_index(shd_splat,"vector_field"),surface_get_texture(surf_velocity));
 				draw_surface(surf_velocity,0,0);
 		shader_reset();
 	surface_reset_target();
@@ -46,7 +38,8 @@ if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
 		surface_copy(tempStorage,0,0,surf_velocity);
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
-/*
+	//stepTime++;
+	
 //Velocity boundaries
 	surface_set_target(surf_tempVelocity);
 		shader_set(shd_velocityBoundary);
@@ -59,34 +52,10 @@ if (((mouse_x > 160) || (mouse_y > 290)) && mouse_check_button(mb_any))
 		surface_copy(tempStorage,0,0,surf_velocity);
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
-		*/
-	//scr_NavierStokes();
-
-}
-else
-{
-	//scr_NavierStokes();
-}
-//if (mousePressed == true){
-	//splat the ink by updating the density field
 	
-	
-
-	/*
-	draw_surface(surf_density,0,0);	
-	surface_copy(tempStorage,0,0,surf_density);
-		surface_copy(surf_density,0,0,surf_tempDensity);
-		surface_copy(surf_tempDensity,0,0,tempStorage);
-		*/
-		/*
-if ((mouse_x > 160) || (mouse_y > 290))
-{
-if (mousePressed == true){
-
 		//stepTime++;
 }
-}
-
+scr_NavierStokes();
 /*
 else
 {

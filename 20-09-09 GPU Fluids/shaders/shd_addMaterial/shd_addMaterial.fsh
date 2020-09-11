@@ -70,9 +70,20 @@ void main() {
 	gl_FragColor = setScalarToTextureUnsigned(new);
 	}
 	else
-	{gl_FragColor = setScalarToTextureUnsigned(new);}
-	
+	{gl_FragColor = texture2D(scalar_field,coords);}
 }
+	/*
+	vec2 coords = vec2(gl_FragCoord.xy);
+	float new = getScalarFromTextureUnsigned(texture2D(scalar_field,coords));
+	if (distance(point,coords) < radius)
+	{
+    vec4 sourceColor = texture2D(scalar_field, coords);
+	new = getScalarFromTextureUnsigned(vec4(mix(sourceColor.xyz, vec3(255.0,0.0,0.0), gauss(point - coords, radius)), 0.0));// * texture2D( gm_BaseTexture, v_vTexcoord );
+	gl_FragColor = setScalarToTextureUnsigned(new);
+	}
+	else
+	{gl_FragColor = setScalarToTextureUnsigned(new);}
+	*/
 	/*
 	// visualize
 	vec2 coords = vec2(gl_FragCoord.xy);

@@ -13,8 +13,12 @@ draw_vertex_texture(0, 480, 0, 1);
 draw_primitive_end();
 */
 
-        switch (DISPLAY_FIELD) {
-            case DISPLAY_FIELD.DENSITY:
+      //  switch (DISPLAY_FIELD) {
+      //      case DISPLAY_FIELD.DENSITY:
+			draw_surface(surf_density,0,0);
+		///	break;
+		//}
+			/*
 				shader_set(shd_visualiseScalar);
 				texture_set_stage(shader_get_sampler_index(shd_visualiseScalar,"scalar_field"),surface_get_texture(surf_density));
 				shader_set_uniform_f(isNegative,false);
@@ -32,14 +36,14 @@ draw_primitive_end();
 				draw_surface(surf_density,0,0);
 				draw_text(0,0,"DISPLAY MODE: DENSITY");
 				*/
-				
+				/*
 				case DISPLAY_FIELD.VELOCITY:
 				shader_set(shd_visualiseVector);
 				texture_set_stage(shader_get_sampler_index(shd_visualiseVector,"vector_field"),surface_get_texture(surf_velocity));
 					draw_surface(surf_velocity,0,0);
 					draw_text(0,0,"DISPLAY MODE: VELOCITY");
-					shader_reset();
 				shader_reset();
+				//shader_reset();
 				/*
                 texture_set_stage(shader_get_sampler_index(shd_visualize,"vector_field"),surface_get_texture(surf_velocity));
                 shader_set_uniform_f(maxval, 32.0);
@@ -53,8 +57,8 @@ draw_primitive_end();
 				//shader_reset();
 				//surface_reset_target();
 				*/
-                break;
-		}
+               // break;
+		//}
 				//surface_reset_target();
                 //break;
 				/*
