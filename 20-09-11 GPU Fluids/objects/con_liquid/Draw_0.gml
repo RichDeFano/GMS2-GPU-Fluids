@@ -46,7 +46,7 @@ if (mousePressed == true){
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
 	//stepTime++;
-	/*
+	
 //Velocity boundaries
 	surface_set_target(surf_tempVelocity);
 		shader_set(shd_velocityBoundary);
@@ -59,7 +59,7 @@ if (mousePressed == true){
 		surface_copy(tempStorage,0,0,surf_velocity);
 		surface_copy(surf_velocity,0,0,surf_tempVelocity);
 		surface_copy(surf_tempVelocity,0,0,tempStorage);
-	*/
+	
 		//stepTime++;
 }
 /*

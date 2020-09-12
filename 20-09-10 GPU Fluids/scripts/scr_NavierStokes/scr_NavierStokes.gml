@@ -119,7 +119,7 @@ surface_reset_target();
 	surface_copy(tempStorage,0,0,surf_velocity);
 	surface_copy(surf_velocity,0,0,surf_tempVelocity);
 	surface_copy(surf_tempVelocity,0,0,tempStorage);
-		*/
+		
 //Vorticity Confinement
 surface_set_target(surf_tempVorticity)
 	shader_set(shd_vorticity);
@@ -149,7 +149,7 @@ surface_reset_target();
 	surface_copy(tempStorage,0,0,surf_velocity);
 	surface_copy(surf_velocity,0,0,surf_tempVelocity);
 	surface_copy(surf_tempVelocity,0,0,tempStorage);
-
+*/
 //////////////////////////////////////////////////////////////
 //Step 4: Projection of the Vector Fields
 ////////////////////////////////////////////////////////////

@@ -66,12 +66,7 @@ buoyancyAlpha = instance_create_layer(startingX,startingY+304,"GUI",obj_sliderPa
 	buoyancyAlpha.maxValue = 1.0;
 	buoyancyAlpha.value = 0.50;
 	
-buoyancyBeta = instance_create_layer(startingX,startingY+328,"GUI",obj_sliderParent);
+buoyancyBeta = instance_create_layer(startingX,startingY+348,"GUI",obj_sliderParent);
 	buoyancyBeta.minValue = 0.0;
 	buoyancyBeta.maxValue = 1.0;
 	buoyancyBeta.value = 0.99;
-	
-timestep = instance_create_layer(startingX,startingY+352,"GUI",obj_sliderParent);
-	timestep.minValue = 0.0;
-	timestep.maxValue = 1.0;
-	timestep.value = 0.00125;
