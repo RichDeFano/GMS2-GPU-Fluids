@@ -2,6 +2,7 @@
 
 varying vec2 v_vTexcoord;
 uniform sampler2D velocity_field;
+uniform float rHalfScale;
 
 vec2 getVectorFromTexture(vec4 colorValues){
 	vec2 newVector = vec2(colorValues.xy + ((colorValues.zw)/255.0));
@@ -24,7 +25,7 @@ void main() {
     vec2 bottom = getVectorFromTexture(texture2D(velocity_field, coords + vec2(0.0, -1.0)));//.xy;
     vec2 top = getVectorFromTexture(texture2D(velocity_field, coords + vec2(0.0, 1.0)));//.xy;
 	
-	float div = (0.5 * ((right.x - left.x) + (bottom.y - top.y))) ;
+	float div = (rHalfScale * ((right.x - left.x) + (bottom.y - top.y))) ;
 	gl_FragColor = setScalarToTexture(div);
 
 	
