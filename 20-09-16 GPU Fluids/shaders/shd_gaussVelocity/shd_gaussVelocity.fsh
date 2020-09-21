@@ -79,10 +79,10 @@ void main()
 	//if ((change.x < 0.25) && (change.y < 0.25)) && ((change.x > -0.25) && (change.y > -0.25))
 	vec2 sourceVel = getVectorFromTexture(texture2D(vector_field,coords));
 	sourceVel = mix(sourceVel,change,gauss((point - coords),radius));
-	float magX = sourceVel.x / 5.0;
-	float magY = sourceVel.y / 5.0;
-	float bofa = (magX + magY) / 2.0;
-	gl_FragColor = setVectorToTexture(sourceVel,1.0*bofa);
+	float magX = sourceVel.x / 10.0;
+	float magY = sourceVel.y / 10.0;
+	float average = (magX + magY) / 2.0;
+	gl_FragColor = setVectorToTexture(sourceVel,0.5*average);
 }
 //F * dt * exp( (x-xp)2 + (y-yp)2 / r
 	/*

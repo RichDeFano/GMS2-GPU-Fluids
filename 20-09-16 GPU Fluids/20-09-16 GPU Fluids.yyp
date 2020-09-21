@@ -95,14 +95,6 @@
             }
         },
         {
-            "Key": "191bb39e-4d87-4ef4-aa3b-ac576d345ebc",
-            "Value": {
-                "id": "6d0ffcf9-914a-46fb-9eb2-f7e63c2a05ac",
-                "resourcePath": "shaders\\shd_visualize\\shd_visualize.yy",
-                "resourceType": "GMShader"
-            }
-        },
-        {
             "Key": "1cca1e3a-eb35-4ac2-ac84-bbfba3660c35",
             "Value": {
                 "id": "db411401-1231-4a1e-b48e-f48d35760eff",
@@ -303,14 +295,6 @@
             }
         },
         {
-            "Key": "9d42b373-b688-42c5-8974-66ee851ffb16",
-            "Value": {
-                "id": "e22d97ef-d476-427f-9957-314e280976ac",
-                "resourcePath": "shaders\\shd_gaussianSplat\\shd_gaussianSplat.yy",
-                "resourceType": "GMShader"
-            }
-        },
-        {
             "Key": "a169902b-0892-41d6-b086-946ca25c8f79",
             "Value": {
                 "id": "22862c28-e0ff-45b1-8f9a-5136d78930bb",
@@ -423,18 +407,10 @@
             }
         },
         {
-            "Key": "d4f347ee-8f6d-498e-9c34-884f330ade3d",
-            "Value": {
-                "id": "9203b02e-8f4f-4093-a188-8f40395eb534",
-                "resourcePath": "views\\d4f347ee-8f6d-498e-9c34-884f330ade3d.yy",
-                "resourceType": "GMFolder"
-            }
-        },
-        {
             "Key": "d5366eb8-d3da-47d9-a5bd-f983d0f1d885",
             "Value": {
                 "id": "3be88c96-1ad4-4cfe-a4c8-d88ff452cd04",
-                "resourcePath": "shaders\\shd_splat\\shd_splat.yy",
+                "resourcePath": "shaders\\shd_addDensity\\shd_addDensity.yy",
                 "resourceType": "GMShader"
             }
         },

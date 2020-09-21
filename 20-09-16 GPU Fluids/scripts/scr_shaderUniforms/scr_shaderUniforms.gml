@@ -31,24 +31,14 @@ boundH = shader_get_uniform(shd_velocityBoundary,"height");
 //Field Addition
 ascale = shader_get_uniform(shd_addVectors,"scaleA");
 bscale = shader_get_uniform(shd_addVectors,"scaleB");
-///Viewing fields
-bias = shader_get_uniform(shd_visualize,"bias");
-scale = shader_get_uniform(shd_visualize,"scale");
-maxval = shader_get_uniform(shd_visualize,"maxVal");
-alph = shader_get_uniform(shd_visualize,"alph");
-isVector = shader_get_uniform(shd_visualize,"isVector");
-isNegative = shader_get_uniform(shd_visualize,"isNegative");
+
 //gaussian splat
-pt = shader_get_uniform(shd_gaussianSplat,"point");
-r = shader_get_uniform(shd_gaussianSplat,"radius");
-fC = shader_get_uniform(shd_gaussianSplat,"fillColor");
-spSize = shader_get_uniform(shd_gaussianSplat,"size");
-spScale = shader_get_uniform(shd_gaussianSplat,"scale");
-//velocity splat
-vpt = shader_get_uniform(shd_splat, "point");
-vr	= shader_get_uniform(shd_splat,"radius");
-vfC = shader_get_uniform(shd_splat,"fillColor");
-///new
+pt = shader_get_uniform(shd_addDensity,"point");
+r = shader_get_uniform(shd_addDensity,"radius");
+fC = shader_get_uniform(shd_addDensity,"fillColor");
+spSize = shader_get_uniform(shd_addDensity,"size");
+spScale = shader_get_uniform(shd_addDensity,"scale");
+
 prevPt = shader_get_uniform(shd_gaussVelocity,"prevPoint");
 gaussTime = shader_get_uniform(shd_gaussVelocity,"timestep");
 gaussPt = shader_get_uniform(shd_gaussVelocity,"point");

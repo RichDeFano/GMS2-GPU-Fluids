@@ -1,11 +1,5 @@
 /// @description Insert description here
 // You can write your code in this editor
-
-//gpu_set_blendmode_ext(bm_src_alpha,bm_inv_src_alpha);
-
-//shader_set(shd_visualize)
-//scr_swapFields(tempStorage,surf_density,surf_tempDensity);
-
         switch (DISPLAY_FIELD) {
             case DISPLAY_FIELD.DENSITY:
                 scr_drawTextureToWorld("Density",surf_density);
@@ -77,6 +71,11 @@
                 break;
 		
         }
+//gpu_set_blendmode_ext(bm_src_alpha,bm_inv_src_alpha);
+
+//shader_set(shd_visualize)
+//scr_swapFields(tempStorage,surf_density,surf_tempDensity);
+
 //stepTime += stepTime;
 //draw_text(600,200,stepTime);
 //shader_reset();
