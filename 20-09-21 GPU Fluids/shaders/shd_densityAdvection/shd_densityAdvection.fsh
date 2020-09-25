@@ -4,15 +4,14 @@ varying vec4 v_vColour;
 //uniform vec2 rSize;
 //uniform float rScale;
 uniform float time;
-//uniform float dissipation;
-
-	uniform vec2 texelSize;
-	uniform bool useMac;
-	uniform vec2 dissipationValues;
-	uniform float macWeight;
+uniform float dissipation;
+uniform vec2 texelSize;
+	//uniform bool useMac;
+	//uniform vec2 dissipationValues;
+	//uniform float macWeight;
 
 uniform sampler2D velocity_field;
-uniform sampler2D advected_field;
+//uniform sampler2D advected_field;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 #define VECTOR_RANGE 10.0
@@ -67,19 +66,19 @@ float gauss(vec2 p, float r) {
 void main()
 {
 
-    vec2 velocity = getVectorFromTexture(texture2D(gm_BaseTexture, v_vTexcoord));
+    vec2 velocity = getVectorFromTexture(texture2D(velocity_field, v_vTexcoord));
     vec2 pos = v_vTexcoord - (time * texelSize) * velocity;
-    vec2 nextPhi = getVectorFromTexture(texture2D(gm_BaseTexture, pos));
-    
+   // vec2 nextPhi = getVectorFromTexture(texture2D(velocity_field, pos));
+    /*
 	if (useMac == true){
-        vec2 currentPhi = getVectorFromTexture(texture2D(gm_BaseTexture, v_vTexcoord + (time * texelSize) * nextPhi));
+        vec2 currentPhi = getVectorFromTexture(texture2D(velocity_field, v_vTexcoord + (time * texelSize) * nextPhi));
         velocity = nextPhi + (velocity - currentPhi) * macWeight;
         
         vec2 coord = floor(pos/ texelSize + 0.5) * texelSize;
-        vec2 top_left = getVectorFromTexture(texture2D(gm_BaseTexture, coord + vec2(-texelSize.x, -texelSize.y) * 0.5));
-        vec2 bottom_right = getVectorFromTexture(texture2D(gm_BaseTexture, coord + vec2(texelSize.x, texelSize.y) * 0.5));
-        vec2 top_right = getVectorFromTexture(texture2D(gm_BaseTexture, coord + vec2(texelSize.x, -texelSize.y) * 0.5));
-        vec2 bottom_left = getVectorFromTexture(texture2D(gm_BaseTexture, coord + vec2(-texelSize.x, texelSize.y) * 0.5));
+        vec2 top_left = getVectorFromTexture(texture2D(velocity_field, coord + vec2(-texelSize.x, -texelSize.y) * 0.5));
+        vec2 bottom_right = getVectorFromTexture(texture2D(velocity_field, coord + vec2(texelSize.x, texelSize.y) * 0.5));
+        vec2 top_right = getVectorFromTexture(texture2D(velocity_field, coord + vec2(texelSize.x, -texelSize.y) * 0.5));
+        vec2 bottom_left = getVectorFromTexture(texture2D(velocity_field, coord + vec2(-texelSize.x, texelSize.y) * 0.5));
 		
 		vec2 newTop =  min(min(min(top_left, top_right), bottom_left), bottom_right);
 		vec2 newWeight = max(max(max(top_left, top_right), bottom_left), bottom_right);
@@ -93,8 +92,9 @@ void main()
         if (velocity.x > 0.0) velocity.x = max(0.0, velocity.x - dissipationValues.y); else velocity.x = min(0.0, velocity.x + dissipationValues.y);
         if (velocity.y > 0.0) velocity.y = max(0.0, velocity.y - dissipationValues.y); else velocity.y = min(0.0, velocity.y + dissipationValues.y);
     }
-    
-    gl_FragColor = setVectorToTexture(velocity);
+	*/
+    vec4 color = dissipation * texture2D( gm_BaseTexture, pos);
+    gl_FragColor = color;//setVectorToTexture(velocity);
 
 	/*
 	vec2 coords = gl_FragCoord.xy;
@@ -112,4 +112,3 @@ void main()
 	*/
 
 }
-

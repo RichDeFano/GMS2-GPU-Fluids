@@ -1,0 +1,7 @@
+scr_swapFields(tempStorage,surf_tempVelocity,surf_velocity);
+scr_swapFields(tempStorage,surf_tempDensity,surf_density);
+scr_swapFields(tempStorage,surf_tempDiffusion,surf_diffusion);
+scr_swapFields(tempStorage,surf_tempDivergence,surf_divergence);
+scr_swapFields(tempStorage,surf_tempPressure,surf_pressure);
+scr_swapFields(tempStorage,surf_tempVorticity,surf_vorticity);
+scr_swapFields(tempStorage,surf_tempTemperature,surf_temperature);
