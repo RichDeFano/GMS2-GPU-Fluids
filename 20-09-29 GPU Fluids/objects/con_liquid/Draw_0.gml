@@ -31,7 +31,7 @@ if ((surface_exists(surf_tempDensity)) && (surface_exists(surf_density))) && ((s
 		//draw_surface(surf_velocity,0,0);
 	}
 	//gpu_set_blendmode(bm_normal);
-	//scr_NavierStokes();
+	scr_NavierStokes();
 	/*
 		shader_set(shd_fieldVisualization);
 		shader_set_uniform_f(isVec,false);

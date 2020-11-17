@@ -74,7 +74,7 @@ void main() {
 	{
 	newScalar = mix(sourceScalar, SCALAR_RANGE,gauss((point-coords),radius));
 	}
-	//float mag = newColor/SCALAR_RANGE;
+	float mag = newScalar/SCALAR_RANGE;
 
 	gl_FragColor = setScalarToTextureUnsigned(newScalar,1.0);
 }	
